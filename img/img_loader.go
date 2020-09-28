@@ -1,11 +1,10 @@
-package img_loader
+package img
 
 import (
     "fmt"
     "image"
     "image/jpeg"
     "os"
-    "io"
 )
 
 type RGB_Pixel struct {
@@ -14,9 +13,9 @@ type RGB_Pixel struct {
     B int
 }
 
-type RGB_Image [][]Pixel
+type RGB_Image [][]RGB_Pixel
 
-func getPixels(path) (RGB_Image) {
+func GetPixels(path string) (RGB_Image) {
     image.RegisterFormat("jpeg", "jpeg", jpeg.Decode, jpeg.DecodeConfig)
 
     file, err := os.Open(path)
@@ -37,7 +36,7 @@ func getPixels(path) (RGB_Image) {
 
     var pixels RGB_Image
     for y := 0; y < height; y++ {
-        var row []Pixel
+        var row []RGB_Pixel
         for x := 0; x < width; x++ {
             row = append(row, rgbaToRgb(img.At(x, y).RGBA()))
         }
@@ -47,10 +46,10 @@ func getPixels(path) (RGB_Image) {
     return pixels
 }
 
-func rgbaToRgb(r uint32, g uint32, b uint32, a uint32) Pixel {
+func rgbaToRgb(r uint32, g uint32, b uint32, a uint32) RGB_Pixel {
     return RGB_Pixel {
         int(r / 257),
         int(g / 257),
-        int(b / 257)
+        int(b / 257),
     }
 }

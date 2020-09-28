@@ -2,7 +2,7 @@ package main
 
 import (
     "fmt"
-    "src/img_loader"
+    "./img"
 )
 
 const (
@@ -13,8 +13,10 @@ const (
 func main() {
 	fmt.Printf("Welcome to GOCR %s!\n", VERSION)
 
-    rgb_array := img_loader.getPixels(IMAGE_PATH)
-    fmt.Print(rgb_array)
+    rgb_array := img.GetPixels(IMAGE_PATH)
+    fmt.Println("[IMG] loaded ;)")
+    _ = rgb_array
+    //fmt.Print(rgb_array)
 
     //img.preprocess(pixel_array)
 
