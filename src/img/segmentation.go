@@ -17,17 +17,36 @@ func GetCharacters(img_array BW_Image) ([]BW_Image) {
     var characters []BW_Image
     characters = append(characters, img_array)
 
+    row := 0
+    for row < len(img_array) {
+        for isLineWhite(img_array[row]) {
+            row++
+        }
 
-
+        for i := 0; row > 0 && i < len(img_array[0]); i++ {
+            img_array[row-1][i].B = false
+        }
+        row++
+    }
 
     return characters
+}
+
+func isLineWhite(line[] BW_Pixel) (bool) {
+    i:= 0
+    for ; i < len(line) && line[i].B; i++ {
+
+    }
+
+    return i == len(line)
+
 }
 
 func SaveImage(img_array BW_Image, path string) (){
     img := image.NewRGBA(image.Rect(0, 0, len(img_array[0]), len(img_array)))
 
-    for i, row := range img_array {
-        for j, pixel := range row {
+    for j, row := range img_array {
+        for i, pixel := range row {
             var greyscale uint8 = 0
             if pixel.B {
                 greyscale = 255
