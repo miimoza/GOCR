@@ -38,12 +38,11 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
     }
 
     i_m := 127
-    fmt.Println("yes")
+    fmt.Println("Binarize")
 
-    /*
     i_s := 0
     i_e := 255
-    i_m := int((i_s + i_e) / 2.0) // center of the weighing scale I_m
+    i_m = int((i_s + i_e) / 2.0) // center of the weighing scale I_m
     w_l := get_weight(i_s, i_m + 1, histogram) // weight on the left W_l
     w_r := get_weight(i_m + 1, i_e + 1, histogram) // weight on the right W_r
     for (i_s <= i_e) {
@@ -66,7 +65,6 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
         }
         fmt.Println(i_s, i_e, ",", i_m)
     }
-    */
 
     var bw_image BW_Image
     for i, s := range rgb_image {
