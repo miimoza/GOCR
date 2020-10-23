@@ -7,7 +7,7 @@ import (
 
 const (
    VERSION = "alpha (α)"
-   IMAGE_PATH = "res/test.jpg"
+   IMAGE_PATH = "res/medium.png"
 )
 
 func main() {
@@ -20,9 +20,10 @@ func main() {
     fmt.Println("Binarized")
 
 
-    _ = img.GetCharacters(bw_array)
-
-
+    characters := img.GetCharacters(bw_array)
+    for id, character := range characters {
+        img.SaveImage(character, fmt.Sprint("res/characters/char", id, ".png"))
+    }
 
     //fmt.Print(rgb_array)
 

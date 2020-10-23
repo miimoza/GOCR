@@ -12,34 +12,93 @@ import
 func GetCharacters(img_array BW_Image) ([]BW_Image) {
     fmt.Println("Start Segmentation")
 
-    SaveImage(img_array, "./initial.png")
-
     var characters []BW_Image
     characters = append(characters, img_array)
 
 
+    lines := getLines(img_array)
+    for _, line := range  lines {
 
-    row := 0
-    for row < len(img_array) {
-        firstline := isLineWhite(img_array[row])
-        for row < len(img_array) && firstline && isLineWhite(img_array[row]) {
-            row++
-        }
+        column := 0
+        for column < len(line[0]) {
+            firstline := isLineWhite(getColumn(line, column))
 
-        for i := 0; row > 1 && i < len(img_array[0]); i++ {
-            img_array[row][i].B = false
+            var character BW_Image
+
+            for column < len(line[0]) && !xor(firstline, isLineWhite(getColumn(line, column))) {
+                if !firstline {
+                    character = append(character, getColumn(line, column))
+                }
+                column++
+            }
+
+            if !firstline {
+                characters = append(characters, redressChar(character))
+            }
         }
-        row++
     }
-
-    SaveImage(img_array, "./out.png")
 
     return characters
 }
 
+func getColumn(line BW_Image, column int) ([] BW_Pixel) {
+    var column_array []BW_Pixel
+
+    for i := 0; i < len(line); i++ {
+        column_array = append(column_array, line[i][column])
+    }
+
+    return column_array
+}
+
+func redressChar(character BW_Image) (BW_Image){
+    new_character := make([][]BW_Pixel, len(character[0]))
+    for i := range new_character {
+        new_character[i] = make([]BW_Pixel, len(character))
+    }
+
+    for i, l := range character {
+        for j, pxl := range l {
+            new_character[j][i] = pxl
+        }
+    }
+
+    return new_character
+}
+
+func xor(a bool, b bool) (bool){
+    return (a || b) && !(a && b)
+}
+
+func getLines(img_array BW_Image) ([]BW_Image) {
+    var lines []BW_Image
+
+    row := 0
+    for row < len(img_array) {
+        firstline := isLineWhite(img_array[row])
+
+        var line BW_Image
+
+        for row < len(img_array) && !xor(firstline, isLineWhite(img_array[row])) {
+            if !firstline {
+                line = append(line, img_array[row])
+            }
+            row++
+        }
+
+        if !firstline {
+            lines = append(lines, line)
+        }
+    }
+
+    return lines
+}
+
 func isLineWhite(line[] BW_Pixel) (bool) {
-    i:= 0
-    for ; i < len(line) && line[i].B; i++ {
+    i := 0
+
+    for i < len(line) && line[i].B {
+        i++
     }
 
     return i == len(line)
