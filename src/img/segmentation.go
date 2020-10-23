@@ -17,6 +17,9 @@ func GetCharacters(img_array BW_Image) ([]BW_Image) {
     var characters []BW_Image
     characters = append(characters, img_array)
 
+
+
+
     return characters
 }
 
