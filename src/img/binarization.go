@@ -8,7 +8,7 @@ const (
 )
 
 type BW_Pixel struct {
-    hue bool
+    B bool
 }
 
 type BW_Image [][]BW_Pixel
@@ -20,11 +20,11 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
         var row []BW_Pixel
         for _, s2 := range s {
             var luminance float64 = float64(s2.R) * R_LUMINANCE + float64(s2.G) * G_LUMINANCE + float64(s2.B) * B_LUMINANCE
-            hue := false
+            B := false
             if luminance > THRESHOLD {
-                hue = true
+                B = true
             }
-            row = append(row, BW_Pixel {hue})
+            row = append(row, BW_Pixel {B})
         }
         bw_image = append(bw_image, row)
     }
