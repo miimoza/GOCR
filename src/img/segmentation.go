@@ -12,22 +12,27 @@ import
 func GetCharacters(img_array BW_Image) ([]BW_Image) {
     fmt.Println("Start Segmentation")
 
-    SaveImage(img_array, "./out.png")
+    SaveImage(img_array, "./initial.png")
 
     var characters []BW_Image
     characters = append(characters, img_array)
 
+
+
     row := 0
     for row < len(img_array) {
-        for isLineWhite(img_array[row]) {
+        firstline := isLineWhite(img_array[row])
+        for firstline && isLineWhite(img_array[row]) {
             row++
         }
 
-        for i := 0; row > 0 && i < len(img_array[0]); i++ {
-            img_array[row-1][i].B = false
+        for i := 0; row > 1 && i < len(img_array[0]); i++ {
+            img_array[row][i].B = false
         }
         row++
     }
+
+    SaveImage(img_array, "./out.png")
 
     return characters
 }
@@ -35,11 +40,9 @@ func GetCharacters(img_array BW_Image) ([]BW_Image) {
 func isLineWhite(line[] BW_Pixel) (bool) {
     i:= 0
     for ; i < len(line) && line[i].B; i++ {
-
     }
 
     return i == len(line)
-
 }
 
 func SaveImage(img_array BW_Image, path string) (){
