@@ -15,8 +15,8 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
     var bw_image BW_Image;
 
     for _, s := range rgb_image {
-        for j, _ := range s {
-            fmt.Println(j)
+        for _, s2 := range s {
+            fmt.Println(s2)
         }
     }
 
