@@ -38,7 +38,7 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
     }
 
     i_m := 127
-    fmt.Println("Binarize")
+    fmt.Println("Binarize histogram etc.")
 
     i_s := 0
     i_e := 255
@@ -65,6 +65,8 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
         }
         fmt.Println(i_s, i_e, ",", i_m)
     }
+
+    i_m = (i_m + 127 * 7) / 8
 
     var bw_image BW_Image
     for i, s := range rgb_image {
