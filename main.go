@@ -15,7 +15,10 @@ func main() {
 
     rgb_array := img.GetPixels(IMAGE_PATH)
     fmt.Println("[IMG] loaded ;)")
-    _ = rgb_array
+
+    _ = img.Binarize(rgb_array)
+    fmt.Println("Binarized")
+
     //fmt.Print(rgb_array)
 
     //img.preprocess(pixel_array)

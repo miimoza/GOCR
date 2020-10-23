@@ -10,12 +10,12 @@ type BW_Pixel struct {
 
 type BW_Image [][]BW_Pixel
 
-func binarize(rgb_image RGB_Image) (BW_Image) {
+func Binarize(rgb_image RGB_Image) (BW_Image) {
 
-    var bw_image : BW_Image;
+    var bw_image BW_Image;
 
-    for i, s := range rgb_image {
-        for j, s2 := range s {
+    for _, s := range rgb_image {
+        for j, _ := range s {
             fmt.Println(j)
         }
     }
