@@ -22,7 +22,7 @@ func GetCharacters(img_array BW_Image) ([]BW_Image) {
     row := 0
     for row < len(img_array) {
         firstline := isLineWhite(img_array[row])
-        for firstline && isLineWhite(img_array[row]) {
+        for row < len(img_array) && firstline && isLineWhite(img_array[row]) {
             row++
         }
 
