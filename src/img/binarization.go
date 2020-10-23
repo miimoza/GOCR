@@ -4,7 +4,7 @@ const (
    R_LUMINANCE = 0.2126
    G_LUMINANCE = 0.7152
    B_LUMINANCE = 0.0722
-   THRESHOLD = 0.5
+   THRESHOLD = 127
 )
 
 type BW_Pixel struct {
