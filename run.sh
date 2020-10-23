@@ -1,1 +1,1 @@
-go run src/main.go
+GOPATH=$(pwd) go run main.go
