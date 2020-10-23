@@ -21,6 +21,7 @@ type GS_Image [][]GS_Pixel
 
 func Binarize(rgb_image RGB_Image) (BW_Image) {
 
+    var histogram [256]int;
 
     var gs_image GS_Image
     for _, s := range rgb_image {
@@ -28,6 +29,7 @@ func Binarize(rgb_image RGB_Image) (BW_Image) {
         for _, s2 := range s {
             var luminance int = int(float64(s2.R) * R_LUMINANCE + float64(s2.G) * G_LUMINANCE + float64(s2.B) * B_LUMINANCE)
             row = append(row, GS_Pixel {luminance})
+            histogram[luminance]++
         }
         gs_image = append(gs_image, row)
     }
