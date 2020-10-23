@@ -12,24 +12,25 @@ import
 func GetCharacters(img_array BW_Image) ([]BW_Image) {
     fmt.Println("Start Segmentation")
 
-    SaveImage(img_array, "../../res/out.png")
+    SaveImage(img_array, "./out.png")
 
     var characters []BW_Image
-    characters[0] = img_array
+    characters = append(characters, img_array)
 
     return characters
 }
 
 func SaveImage(img_array BW_Image, path string) (){
-    img := image.NewRGBA(image.Rect(0, 0, 100, 100))
+    img := image.NewRGBA(image.Rect(0, 0, len(img_array[0]), len(img_array)))
 
-    for i := 0; i < 100; i++ {
-        for j := 0; i < 100; j++ {
-            greyscale := 0
-            if img_array[i][j].B {
+    for i, row := range img_array {
+        for j, pixel := range row {
+            var greyscale uint8 = 0
+            if pixel.B {
                 greyscale = 255
             }
-            pxl := color.RGBA{4, greyscale, greyscale, greyscale}
+
+            pxl := color.RGBA{greyscale, greyscale, greyscale, 255}
             img.Set(i, j, pxl)
         }
     }
