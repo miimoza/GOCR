@@ -4,25 +4,33 @@ import
 (
     "fmt"
     "image"
+    "image/color"
+    "image/png"
+    "os"
 )
 
-func getCharacters(img BW_Image) (BW_Image[]) {
+func GetCharacters(img_array BW_Image) ([]BW_Image) {
     fmt.Println("Start Segmentation")
 
+    SaveImage(img_array, "../../res/out.png")
 
+    var characters []BW_Image
+    characters[0] = img_array
 
-
-
+    return characters
 }
 
-func saveImage(img BW_Image, path string) (){
+func SaveImage(img_array BW_Image, path string) (){
     img := image.NewRGBA(image.Rect(0, 0, 100, 100))
 
     for i := 0; i < 100; i++ {
-		img.Set(i, i, color.RGBA{i, i, i, i})
+		img.Set(i, i, color.RGBA{4, 4, 4, 4})
 	}
 
-    f, _ := os.OpenFile("../../res/out.png", os.O_WRONLY|os.O_CREATE, 0600)
+    f, _ := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0600)
     defer f.Close()
-    img.Encode(f, img)
+    png.Encode(f, img)
+
+
+
 }
