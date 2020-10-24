@@ -1,1 +1,3 @@
 *.png
+!/res/easy.png
+!/res/medium.png
